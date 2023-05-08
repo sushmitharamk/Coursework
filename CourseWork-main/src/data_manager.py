@@ -6,7 +6,7 @@ from .dataset_loader import ImageDataset
 from .datasets import init_imgreid_dataset
 from .samplers import build_train_sampler
 from .transforms import build_transforms
-
+from PIL import Image
 
 class BaseDataManager:
     def __init__(
@@ -74,6 +74,7 @@ class BaseDataManager:
             self.testdataset_dict[name]["query"],
             self.testdataset_dict[name]["gallery"],
         )
+
 
 
 class ImageDataManager(BaseDataManager):
@@ -157,4 +158,5 @@ class ImageDataManager(BaseDataManager):
         print(f"  # train cameras  : {self.num_train_cams}")
         print(f"  test names       : {self.target_names}")
         print("  *****************************************")
+        #print(f"training image before pre-processing: "{print_image_before_processing()})
         print("\n")
