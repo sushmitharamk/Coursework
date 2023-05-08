@@ -30,6 +30,7 @@ from src.utils.torchtools import (
     resume_from_checkpoint,
 )
 from src.utils.visualtools import visualize_ranked_results
+import matplotlib.pyplot as plt
 
 # global variables
 parser = argument_parser()
@@ -310,6 +311,10 @@ def test(
     for r in ranks:
         print("Rank-{:<3}: {:.1%}".format(r, cmc[r - 1]))
     print("------------------")
+    
+    plt.plot(ranks,cmc)
+    plt.show()
+    
 
     if return_distmat:
         return distmat
