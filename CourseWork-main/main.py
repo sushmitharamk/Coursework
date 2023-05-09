@@ -207,6 +207,14 @@ def train(
         xent_losses.update(xent_loss.item(), pids.size(0))
         htri_losses.update(htri_loss.item(), pids.size(0))
         accs.update(accuracy(outputs, pids)[0])
+        #plot losses
+        plt.plot(xent_losses)
+        plt.plot(htri_losses)
+        plt.title('Model Loss')
+        plt.ylabel('losses')
+        plt.xlabel('epoch')
+        plt.legend(['cross-entropy', 'triplet-loss'], loc='upper left')
+        plt.show()
 
         if (batch_idx + 1) % args.print_freq == 0:
             print(
@@ -312,7 +320,12 @@ def test(
         print("Rank-{:<3}: {:.1%}".format(r, cmc[r - 1]))
     print("------------------")
     
-    plt.plot(ranks,cmc)
+    plt.plot(history.history['accuracy'])
+    plt.plot(history.history['val_accuracy'])
+    plt.title('model accuracy')
+    plt.ylabel('accuracy')
+    plt.xlabel('epoch')
+    plt.legend(['train', 'test'], loc='upper left')
     plt.show()
     
 
